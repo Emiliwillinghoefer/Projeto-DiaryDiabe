@@ -1,4 +1,4 @@
-const GlucoseSugar = require('../model/glucoseMeasurement')
+const DietDiary = require('../models/glucoseMeasurement')
 
 module.exports= {
     async get(req, res){
