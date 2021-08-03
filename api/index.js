@@ -1,29 +1,27 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 8000;
+const dotenv = require('dotenv');
+dotenv.config();
 
-const BloodGlucose = require('./controller/glucoseMeasurementController');
-const Meal = require('./controller/mealController')
+const authMiddleware = require('./src//middlewares/auth');
+const authRoute = require('./src/routes/auth');
+const mealRoute = require('./src/routes/meal');
+// const BloodGlucose = require('./src/controllers/glucoseMeasurementController');
 
-//test
-app.get('/', () => {
-    console.log("lol");
-});
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.post('/create', DietDiary.);
+app.use('/auth', authRoute);
 
-// profile 
-    // /login
-    // /signup
-    // /recover
+app.use(authMiddleware);
+app.use('/meal', mealRoute)
 
-
-// meal
-app.get('/meal', Meal.get)
 // glucose
-app.get('/bloodGlucose', BloodGlucose.get)
+// app.get('/bloodGlucose', BloodGlucose.get)
 
-
-
-
-const listener = app.listen(port);
+app.listen(port, () => {
+	console.log("Listening port :%s", port);
+});
