@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
 		return res.status(401).send({ "error": "Token mal formatado!" });
 	}
 
-	jwt.verify(token, process.env.secret, (err, decoded) => {
+	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) {
 			return res.status(401).send({ "error": "Token invalido!" });
 		}

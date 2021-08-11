@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
 function generateToken(params = {}) {
-	return jwt.sign(params, process.env.secret, {
+	return jwt.sign(params, process.env.JWT_SECRET, {
 		expiresIn: 86400,
 	});
 }
